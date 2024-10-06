@@ -7,8 +7,7 @@
   max-width: 500px;
   margin: 0px auto;
 
-  padding: 35px 35px 50px 35px;
-  margin-top: 50px;
+  padding: 0px 35px 50px 35px;
   background-color: #ffffff;
 }
 
@@ -59,4 +58,8 @@
   > div > label {
     margin-right: 5px;
   }
+}
+.btn-primary,
+.btn {
+  cursor: pointer;
 }

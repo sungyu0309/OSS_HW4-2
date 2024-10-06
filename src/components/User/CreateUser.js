@@ -53,7 +53,6 @@ const CreateUser = () => {
       <div className="heading">
         {isLoading && <Loader />}
         {error && <p>Error: {error}</p>}
-        <p>User Form</p>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">

@@ -1,43 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Common.css";
+import CreateUser from "../User/CreateUser";
+
 export default function Header() {
   return (
     <div>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div className="container-fluid">
-          <Link to="/" className="navbar-brand" href="#">
-            <span className="navbar-text">React CRUD</span>
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mynavbar"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="mynavbar">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="create-user">
-                  Create User
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="show-user">
-                  Show User
-                </Link>
-              </li>
-            </ul>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Create
+      </button>
+
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                USER FORM
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <CreateUser />
+            </div>
           </div>
         </div>
-      </nav>
+      </div>
     </div>
   );
 }
