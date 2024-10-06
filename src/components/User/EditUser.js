@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Loader from "../Common/Loader";
 import "./User.css";
 
@@ -8,7 +7,6 @@ export default function EditUser({ id }) {
   const [user, setUser] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const getUserApi = "https://67025998bd7c8c1ccd3e9efc.mockapi.io/api/person";
 
   useEffect(() => {
@@ -50,7 +48,8 @@ export default function EditUser({ id }) {
           throw new Error("Network response was not ok");
         }
         // return response.json();
-        navigate("/");
+        // navigate("/");
+        window.location.reload();
       })
       .catch((error) => {
         setError(error.message);

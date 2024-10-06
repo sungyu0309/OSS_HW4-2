@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Loader from "../Common/Loader";
 import "./User.css";
 const CreateUser = () => {
-  const navigate = useNavigate();
   const createUserApi =
     "https://67025998bd7c8c1ccd3e9efc.mockapi.io/api/person";
   const [error, setError] = useState(null);
@@ -37,7 +35,7 @@ const CreateUser = () => {
       if (response.ok) {
         console.log("Form submitted successfully!");
         setUser({ name: "", email: "", phone: "" });
-        navigate("/");
+        window.location.reload();
       } else {
         console.error("Form submission failed!");
       }
