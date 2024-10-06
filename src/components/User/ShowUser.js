@@ -65,7 +65,11 @@ const ShowUser = () => {
                 <tr key={i + 1}>
                   <td>{i + 1}</td>
                   <td>{item.name}</td>
-                  <td>{item.email}</td>
+                  <td>
+                    <a href={`mailto:${item.email}`} style={{ color: "black" }}>
+                      {item.email}
+                    </a>
+                  </td>
                   <td>{item.phone}</td>
                   <td>
                     <Link to={`/edit-user/${item.id}`}>
