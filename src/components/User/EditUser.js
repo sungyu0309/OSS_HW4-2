@@ -9,10 +9,11 @@ const EditUser = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  const getUserApi = "http://localhost:3000/user";
+  const getUserApi = "https://67025998bd7c8c1ccd3e9efc.mockapi.io/api/person";
 
   useEffect(() => {
     getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getUser = () => {
@@ -26,14 +27,14 @@ const EditUser = () => {
       });
   };
 
-  const handelInput = (e) => {
+  const handleInput = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
     console.log(name, value);
     setUser({ ...user, [name]: value });
   };
 
-  const handelSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     fetch(getUserApi.concat("/") + id, {
@@ -56,19 +57,19 @@ const EditUser = () => {
       .catch((error) => {
         setError(error.message);
         setIsLoading(false);
-      })
+      });
   };
 
   return (
     <div className="user-form">
       <div className="heading">
-      {isLoading && <Loader />}
-      {error && <p>Error: {error}</p>}
+        {isLoading && <Loader />}
+        {error && <p>Error: {error}</p>}
         <p>Edit Form</p>
       </div>
-      <form onSubmit={handelSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label for="name" className="form-label">
+          <label htmlFor="name" className="form-label">
             Name
           </label>
           <input
@@ -77,11 +78,12 @@ const EditUser = () => {
             id="name"
             name="name"
             value={user.name}
-            onChange={handelInput}
+            onChange={handleInput}
+            required
           />
         </div>
         <div className="mb-3 mt-3">
-          <label for="email" className="form-label">
+          <label htmlFor="email" className="form-label">
             Email
           </label>
           <input
@@ -90,11 +92,12 @@ const EditUser = () => {
             id="email"
             name="email"
             value={user.email}
-            onChange={handelInput}
+            onChange={handleInput}
+            required
           />
         </div>
         <div className="mb-3">
-          <label for="pwd" className="form-label">
+          <label htmlFor="phone" className="form-label">
             Phone
           </label>
           <input
@@ -103,11 +106,52 @@ const EditUser = () => {
             id="phone"
             name="phone"
             value={user.phone}
-            onChange={handelInput}
+            onChange={handleInput}
+            required
+          />
+        </div>
+        <div>
+          <label className="form-label">Gender</label>
+          <div className="wrapper">
+            <div>
+              <label htmlFor="man">Man</label>
+              <input
+                type="radio"
+                name="gender"
+                id="man"
+                value="man"
+                onChange={handleInput}
+                checked={user.gender === "man"}
+              />
+            </div>
+            <div>
+              <label htmlFor="woman">Woman</label>
+              <input
+                type="radio"
+                name="gender"
+                id="woman"
+                value="woman"
+                onChange={handleInput}
+                checked={user.gender === "woman"}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="vertical">
+          <label htmlFor="birthDate" className="form-label">
+            Birth Date
+          </label>
+          <input
+            type="date"
+            id="birthDate"
+            name="birthDate"
+            value={user.birthDate}
+            onChange={handleInput}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary submit-btn">
-          EDIT
+          Edit
         </button>
       </form>
     </div>
