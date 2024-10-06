@@ -10,6 +10,7 @@ const ShowUser = () => {
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [id, setId] = useState(null);
 
   const handelDelete = async (id) => {
     setIsLoading(true);
@@ -48,7 +49,7 @@ const ShowUser = () => {
   } else {
     return (
       <>
-        <Header />
+        <Header id={id} />
         <div className="mt-5">
           {isLoading && <Loader />}
           {error && <p>Error: {error}</p>}
@@ -78,9 +79,21 @@ const ShowUser = () => {
                     </td>
                     <td>{item.phone}</td>
                     <td>
-                      <Link to={`/edit-user/${item.id}`}>
-                        <i className="fa fa-pencil" aria-hidden="true"></i>
-                      </Link>
+                      <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal2"
+                        style={{ marginRight: "10px", border: "none" }}
+                        onClick={() => {
+                          setId(item.id);
+                          console.log(id);
+                        }}
+                      >
+                        <i
+                          className="fa fa-pencil"
+                          aria-hidden="true"
+                          style={{ margin: "0" }}
+                        ></i>
+                      </button>
                       <Link to={`/user/${item.id}`}>
                         <i className="fa fa-eye" aria-hidden="true"></i>
                       </Link>

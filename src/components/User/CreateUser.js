@@ -37,7 +37,7 @@ const CreateUser = () => {
       if (response.ok) {
         console.log("Form submitted successfully!");
         setUser({ name: "", email: "", phone: "" });
-        navigate("/show-user");
+        navigate("/");
       } else {
         console.error("Form submission failed!");
       }
@@ -137,7 +137,11 @@ const CreateUser = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary submit-btn">
+        <button
+          type="submit"
+          className="btn btn-primary submit-btn"
+          data-bs-dismiss="modal"
+        >
           Submit
         </button>
       </form>

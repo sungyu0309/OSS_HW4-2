@@ -1,22 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loader from "../Common/Loader";
 import "./User.css";
-const EditUser = () => {
+
+export default function EditUser({ id }) {
   const [user, setUser] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { id } = useParams();
   const navigate = useNavigate();
   const getUserApi = "https://67025998bd7c8c1ccd3e9efc.mockapi.io/api/person";
 
   useEffect(() => {
-    getUser();
+    if (id) getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   const getUser = () => {
+    console.log(id);
     axios
       .get(getUserApi.concat("/") + id)
       .then((item) => {
@@ -48,11 +49,8 @@ const EditUser = () => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return response.json();
-      })
-      .then((data) => {
-        setIsLoading(true);
-        navigate("/show-user");
+        // return response.json();
+        navigate("/");
       })
       .catch((error) => {
         setError(error.message);
@@ -150,11 +148,14 @@ const EditUser = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary submit-btn">
+        <button
+          type="submit"
+          className="btn btn-primary submit-btn"
+          data-bs-dismiss="modal"
+        >
           Edit
         </button>
       </form>
     </div>
   );
-};
-export default EditUser;
+}
