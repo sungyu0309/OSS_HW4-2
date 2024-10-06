@@ -4,17 +4,16 @@ import { Link } from "react-router-dom";
 import Loader from "../Common/Loader";
 
 const ShowUser = () => {
-  const showUserApi = "http://localhost:3000/user";
+  const showUserApi = "https://67025998bd7c8c1ccd3e9efc.mockapi.io/api";
 
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handelDelete = async (id) => {
-    console.log("id : -", id);
     setIsLoading(true);
     try {
-      const response = await fetch(showUserApi.concat("/") + id, {
+      const response = await fetch(showUserApi.concat("/person/") + id, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -34,7 +33,7 @@ const ShowUser = () => {
 
   const getUsers = () => {
     axios
-      .get(showUserApi)
+      .get(showUserApi + "/person")
       .then((res) => {
         setUser(res.data);
       })

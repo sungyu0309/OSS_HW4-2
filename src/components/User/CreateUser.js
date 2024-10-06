@@ -12,20 +12,18 @@ const CreateUser = () => {
     name: "",
     email: "",
     phone: "",
-    gender: "",
+    gender: "man",
     birthDate: "",
   });
 
-  const handelInput = (event) => {
-    event.preventDefault();
+  const handleInput = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
     setUser({ ...user, [name]: value });
   };
 
-  const handelSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(user);
     try {
       setIsLoading(true);
       const response = await fetch(createUserApi, {
@@ -57,7 +55,7 @@ const CreateUser = () => {
         {error && <p>Error: {error}</p>}
         <p>User Form</p>
       </div>
-      <form onSubmit={handelSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Name
@@ -68,7 +66,7 @@ const CreateUser = () => {
             id="name"
             name="name"
             value={user.name}
-            onChange={handelInput}
+            onChange={handleInput}
             required
           />
         </div>
@@ -82,7 +80,7 @@ const CreateUser = () => {
             id="email"
             name="email"
             value={user.email}
-            onChange={handelInput}
+            onChange={handleInput}
             required
           />
         </div>
@@ -96,7 +94,7 @@ const CreateUser = () => {
             id="phone"
             name="phone"
             value={user.phone}
-            onChange={handelInput}
+            onChange={handleInput}
             required
           />
         </div>
@@ -105,11 +103,25 @@ const CreateUser = () => {
           <div className="wrapper">
             <div>
               <label htmlFor="man">Man</label>
-              <input type="radio" value="man" name="gender" id="man" checked />
+              <input
+                type="radio"
+                name="gender"
+                id="man"
+                value="man"
+                onChange={handleInput}
+                checked={user.gender === "man"}
+              />
             </div>
             <div>
               <label htmlFor="woman">Woman</label>
-              <input type="radio" value="woman" name="gender" id="woman" />
+              <input
+                type="radio"
+                name="gender"
+                id="woman"
+                value="woman"
+                onChange={handleInput}
+                checked={user.gender === "woman"}
+              />
             </div>
           </div>
         </div>
@@ -122,7 +134,7 @@ const CreateUser = () => {
             id="birthDate"
             name="birthDate"
             value={user.birthDate}
-            onChange={handelInput}
+            onChange={handleInput}
             required
           />
         </div>
