@@ -25,6 +25,12 @@ const EditUser = () => {
 
   return (
     <div className="user mt-5">
+      <button
+        style={{ marginBottom: "10px" }}
+        onClick={() => (window.location.href = "/")}
+      >
+        <i className="fa fa-arrow-left" style={{ margin: "0" }} />
+      </button>
       <table className="table table-bordered">
         <thead>
           <tr>
