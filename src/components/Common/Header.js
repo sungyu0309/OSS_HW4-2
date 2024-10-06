@@ -4,8 +4,23 @@ import CreateUser from "../User/CreateUser";
 import EditUser from "../User/EditUser";
 
 export default function Header(props) {
+  const searchName = () => {
+    const value = document.getElementById("name-input").value;
+    props.setSearchName(value);
+  };
+
+  const resetBtnClick = () => {
+    const nameInput = document.getElementById("name-input");
+    nameInput.value = "";
+    props.setSearchName("");
+  };
   return (
-    <div>
+    <div id="header-wrapper">
+      <div>
+        <input placeholder="이름을 검색해보세요" id="name-input" />
+        <button onClick={searchName}>search</button>
+        <button onClick={resetBtnClick}>reset</button>
+      </div>
       <button
         type="button"
         className="btn btn-primary"

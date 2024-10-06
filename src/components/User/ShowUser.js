@@ -11,6 +11,7 @@ const ShowUser = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [id, setId] = useState(null);
+  const [searchName, setSearchName] = useState("");
 
   const handelDelete = async (id) => {
     setIsLoading(true);
@@ -31,13 +32,20 @@ const ShowUser = () => {
 
   useEffect(() => {
     getUsers();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchName]);
 
   const getUsers = () => {
     axios
       .get(showUserApi + "/person")
       .then((res) => {
-        setUser(res.data);
+        if (searchName === "") setUser(res.data);
+        else {
+          const newArr = res.data.filter((itm) =>
+            itm.name.includes(searchName)
+          );
+          setUser(newArr);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +57,7 @@ const ShowUser = () => {
   } else {
     return (
       <>
-        <Header id={id} />
+        <Header id={id} setSearchName={setSearchName} />
         <div className="mt-5">
           {isLoading && <Loader />}
           {error && <p>Error: {error}</p>}
