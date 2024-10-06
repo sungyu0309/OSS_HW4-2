@@ -26,6 +26,33 @@ export default function EditUser({ id }) {
       });
   };
 
+  const handlePhonenumChange = (event) => {
+    let { name, value } = event.target;
+
+    // 숫자만 남기고 나머지 문자는 제거
+    value = value.replace(/\D/g, "");
+
+    // 숫자가 11자리를 초과하지 않도록 제한
+    if (value.length > 11) {
+      value = value.slice(0, 11);
+    }
+
+    // 010-xxxx-xxxx 형식으로 자동 포맷팅
+    if (value.length <= 3) {
+      // 010 부분만 입력된 경우
+      // eslint-disable-next-line no-self-assign
+      value = value;
+    } else if (value.length <= 7) {
+      // 010-xxxx 부분까지 입력된 경우
+      value = `${value.slice(0, 3)}-${value.slice(3)}`;
+    } else {
+      // 010-xxxx-xxxx 부분까지 입력된 경우
+      value = `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7)}`;
+    }
+
+    setUser({ ...user, [name]: value });
+  };
+
   const handleInput = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -103,7 +130,7 @@ export default function EditUser({ id }) {
             id="phone"
             name="phone"
             value={user.phone}
-            onChange={handleInput}
+            onChange={handlePhonenumChange}
             required
           />
         </div>
